@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 17, 2023 at 08:23 PM
+-- Generation Time: Apr 17, 2023 at 11:10 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -116,7 +116,9 @@ CREATE TABLE `orders` (
   `cus_id` int(11) NOT NULL,
   `driver_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `list` text NOT NULL
+  `list` text NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
