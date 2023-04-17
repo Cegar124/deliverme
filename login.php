@@ -3,7 +3,10 @@
 <html>
 <body>    
 
+    
     <?php
+        //getting user_id that matches to username and password
+
         $username = $_POST["username"];
         $password = $_POST["password"];
         
@@ -14,8 +17,9 @@
         $user_id = $row['user_id'];
     ?>
 
-    <?php
-        
+    <?php 
+        //check if user_id exists in customers table, and route to customer pages
+
         $query = mysqli_query($sql, "SELECT * FROM customers WHERE cus_id='{$user_id}' ");
 
         if($row = mysqli_fetch_assoc($query)) {
@@ -25,6 +29,7 @@
     ?>
 
     <?php
+        //check if user_id exists in admin table, and route to admin pages    
         
         $query = mysqli_query($sql, "SELECT * FROM admin WHERE admin_id='{$user_id}' ");
 
@@ -35,6 +40,7 @@
     ?>
 
     <?php
+        //check if user_id exists in drivers table, and route to driver pages
         
         $query = mysqli_query($sql, "SELECT * FROM drivers WHERE driver_id='{$user_id}' ");
 
@@ -42,11 +48,7 @@
             // route to driver pages
         }
 
-    ?>
-
-    
-
-    
+    ?>  
 
 </body>
 </html>
