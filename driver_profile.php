@@ -25,24 +25,11 @@
             $last_name = $row['last_name'];
         ?>
 
-
         <?php
-            $query = mysqli_query($sql, "SELECT * FROM customers WHERE cus_id='{$user_id}' ");
-            $row = mysqli_fetch_assoc($query);
-            $address_id = $row['address_id'];
-        ?>
-
-        <?php
-            $query = mysqli_query($sql, "SELECT * FROM address WHERE address_id= '{$address_id}'");
+            $query = mysqli_query($sql, " SELECT COUNT(order_id) FROM orders WHERE driver_id='{$user_id}'");
             $result = mysqli_fetch_assoc($query);
-            $st_name = $result['st_name'];
-            $apt = $result['apt_number'];
-            $city = $result['city'];
-            $state = $result['state'];
-            $zipcode = $result['zipcode'];
+
         ?>
-
-
 
         <div class="container emp-profile" style= "padding-top: 100px;">
             <form method="post">
@@ -78,26 +65,24 @@
                         <div class="row">
 
                             <div class="col-md-4">
-                                <label>Address</label>
+                                <label># of Orders</label>
                             </div>
 
                             <div class="col-md-6">
-                                <p> <?php echo $st_name?> 
-                                <?php echo $apt_number?>
-                                <?php echo $city?>, <?php echo $state?> <?php echo $zipcode?> </p>
+                                <p> <?php echo $result ?> </p>
                             </div>
 
                         </div>
 
                     </div>
-
+                    
                 </div>
 
-                <div class="row" style= "padding-top: 20px;">
+                <!-- <div class="row" style= "padding-top: 20px;">
                     <div class="col-md-2">
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                     </div>
-                </div>
+                </div> -->
 
             </form>           
         </div>

@@ -12,17 +12,15 @@
         <?php include('templates/menu.php'); ?>
 
         <!-- content -->
-        
-        
+
 
         <div class="container">
             <div class="align-items-center" style="padding-top: 200px">
 
                 <div class="d-flex justify-content-center">
-                
-                    <form action="customer_profile.php" method="post">
+                    <form action="driver_profile.php" method="post">
 
-                        <h3>Customer Login</h3>
+                        <h3>Driver Login</h3>
 
                         <div class="form-group">
                             <label for="exampleInputUsername1">Username</label>
@@ -37,24 +35,10 @@
                         <div class="d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px" >
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
+
+
                     </form>
                 </div>
-
-                <div class="d-flex justify-content-center">
-                        <p> Login as: </p>
-                        <div class="d-flex justify-content-center" >
-                            
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="driver_login.php">Driver</button>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="#">Admin</button>
-                            </div>
-                        </div>
-
-                </div>
-
-
 
             </div>
         </div>
