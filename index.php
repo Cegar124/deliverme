@@ -12,8 +12,6 @@
         <?php include('templates/menu.php'); ?>
 
         <!-- content -->
-        
-        
 
         <div class="container">
             <div class="align-items-center" style="padding-top: 200px">
