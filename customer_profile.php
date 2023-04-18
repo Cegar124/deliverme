@@ -11,7 +11,8 @@
 
         <!-- content -->
         <?php
-            $query = mysqli_query($sql, "SELECT * FROM users");
+            $user_id = $_GET['user_id'];
+            $query = mysqli_query($sql, "SELECT first_name, last_name FROM users WHERE user_id = '{$user_id}'");
             $row = mysqli_fetch_assoc($query);
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
@@ -19,7 +20,7 @@
         ?>
 
         <?php
-            $query = mysqli_query($sql, "SELECT * FROM customers");
+            $query = mysqli_query($sql, "SELECT * FROM customers WHERE cus_id = '{$user_id}'");
             $row = mysqli_fetch_assoc($query);
             $cus_id = $row['cus_id'];
             $address_id = $row['address_id'];

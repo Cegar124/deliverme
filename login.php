@@ -3,7 +3,6 @@
 <html>
 <body>    
 
-    
     <?php
         //getting user_id that matches to username and password
 
@@ -23,7 +22,7 @@
         $query = mysqli_query($sql, "SELECT * FROM customers WHERE cus_id='{$user_id}' ");
 
         if($row = mysqli_fetch_assoc($query)) {
-            header("Location: http://localhost/deliverme/customer_profile.php");
+            header("Location: http://localhost/deliverme/customer_profile.php?user_id=".$user_id."");
         }
 
     ?>
