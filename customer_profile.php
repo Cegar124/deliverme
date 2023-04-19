@@ -11,6 +11,9 @@
 
         <!-- content -->
         <?php
+            
+        ?>
+        <?php
             //getting user_id that matches to username and password
 
             $username = $_POST["username"];

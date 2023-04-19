@@ -48,6 +48,9 @@
                             <div class="col d-flex justify-content-center">
                                 <a class="btn btn-sm" href="#">Admin</button>
                             </div>
+                            <div class="col d-flex justify-content-center">
+                                <a class="btn btn-sm" href="register.php">Don't have account?</button>
+                            </div>
                         </div>
 
                 </div>
