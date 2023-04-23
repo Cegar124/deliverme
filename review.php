@@ -9,45 +9,22 @@
         <!-- header -->
         <?php include('customer_header.php'); ?>
 
-        <!-- content -->
         <?php
-            
-        ?>
-        <?php
+            // Getting user information from session
             session_start();
-            //getting user_id that matches to username and password
 
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            
-            $query = mysqli_query($sql, "SELECT * FROM users WHERE username='{$username}' AND password='{$password}' ");
-
-            $row = mysqli_fetch_assoc($query);
-
-            $user_id = $row['user_id'];
-            $first_name = $row['first_name'];
-            $last_name = $row['last_name'];
-
-            $_SESSION['user_id'] = $user_id;
-            $_SESSION['first_name'] = $first_name;
-            $_SESSION['last_name'] = $last_name;
+            $user_id = $_SESSION['user_id'];
+            $first_name = $_SESSION['first_name'];
+            $last_name = $_SESSION['last_name'];
         ?>
 
 
         <?php
-            $query = mysqli_query($sql, "SELECT * FROM customers WHERE cus_id='{$user_id}' ");
+            $query = mysqli_query($sql, "SELECT * FROM reviews WHERE cus_id='{$user_id}' ");
             $row = mysqli_fetch_assoc($query);
-            $address_id = $row['address_id'];
-        ?>
-
-        <?php
-            $query = mysqli_query($sql, "SELECT * FROM address WHERE address_id= '{$address_id}'");
-            $result = mysqli_fetch_assoc($query);
-            $st_name = $result['st_name'];
-            $apt = $result['apt_number'];
-            $city = $result['city'];
-            $state = $result['state'];
-            $zipcode = $result['zipcode'];
+            $review_id = $row['review_id'];
+            $driver_id = $row['driver_id'];
+            $review_text = $row['review'];
         ?>
 
 
@@ -83,16 +60,15 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="col">
 
-                            <div class="col-md-4">
-                                <label>Address</label>
+                            <div class="">
+                                <label>Reviews</label>
                             </div>
 
-                            <div class="col-md-6">
-                                <p> <?php echo $st_name?> 
-                                <?php echo $apt_number?>
-                                <?php echo $city?>, <?php echo $state?> <?php echo $zipcode?> </p>
+                            <div class="">
+                                <p>Driver #<?php echo $driver_id?>:
+                                <?php echo $review_text?>
                             </div>
 
                         </div>

@@ -74,6 +74,12 @@
                                 <input type="number" name="zipcode" class="form-control" id="exampleInputZipcode1" placeholder="Zipcode" required>
                             </div>
                         </div>
+                        <hr>
+                        <h5>User Type</h5>
+                        <input type="radio" id="customer" name="user_type" value="customer">
+                        <label for="customer">customer</label>
+                        <input type="radio" id="driver" name="user_type" value="driver">
+                        <label for="driver">driver</label>
 
                         <div class="d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px" >
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -94,6 +100,7 @@
                         $country = $_POST['country'];
                         $apt = $_POST['aptnum'];
                         $zipcode = $_POST['zipcode'];
+                        $user_type = $_POST['user_type'];
 
                         // Get the last user_id and set next user_id
                         $query = mysqli_query($sql, "SELECT MAX(user_id) FROM users");
@@ -105,7 +112,11 @@
 
                         $query3 = mysqli_query($sql, "INSERT INTO address (address_id, st_name, zipcode, city, state, country, apt_num) VALUES ('{$user_id}', '{$st_name}', '{$zipcode}', '{$city}', '{$state}', '{$country}', '{$apt}') ");
 
-                        $query4 = mysqli_query($sql, "INSERT INTO customers (cus_id, address_id) VALUES ('{$user_id}', '{$user_id}')");
+                        if ($user_type == "customer") {
+                            $query4 = mysqli_query($sql, "INSERT INTO customers (cus_id, address_id) VALUES ('{$user_id}', '{$user_id}')");
+                        } else if ($user_type == "driver") {
+                            $query4 = mysqli_query($sql, "INSERT INTO drivers (driver_id) VALUES ('{$user_id}')");
+                        }
 
                         // Redirect user to login page But doesn't work :(
                         header("Location: http://localhost/deliverme/");

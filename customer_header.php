@@ -15,7 +15,7 @@
             <a class="nav-link" href="#">Order</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Reviews</a>
+            <a class="nav-link" href="review.php">Reviews</a>
         </li>
         </ul>
 
