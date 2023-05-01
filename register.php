@@ -119,8 +119,7 @@
                         }
 
                         // Redirect user to login page But doesn't work :(
-                        header("Location: http://localhost/deliverme/");
-                        exit;
+                        header('Location: index.php');
                     }
                 ?>
                 <div class="d-flex justify-content-center">
@@ -128,7 +127,7 @@
                         <div class="d-flex justify-content-center" >
                             
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="register.php">Login</button>
+                                <a class="btn btn-sm" href="index.php">Login</button>
                             </div>
                         </div>
 
