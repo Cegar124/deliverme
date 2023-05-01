@@ -53,7 +53,8 @@
                     $review = array();
                     $review_text = $subRow['review'];
                     $cus_id = $subRow['cus_id'];
-                    array_push($review, $review_text, $cus_id);
+                    $review_id = $subRow['review_id'];
+                    array_push($review, $review_text, $cus_id, $review_id);
                     array_push($reviews, $review);
                 }
 
@@ -75,7 +76,7 @@
             6: store city
             7: store state
             8: store zipcode
-            9: review : [review text, cus id]
+            9: review : [review text, cus id, review_id]
         */
             
             function renderOrders($orders) {
@@ -128,8 +129,8 @@
                         <div>
                             From user #{$review[1]}
                         </div>
-                        <div class=''>
-                            &nbsp;&nbsp;&nbsp;'{$review[0]}'
+                        <div class='d-flex align-items-start'>
+                            &nbsp;&nbsp;&nbsp;'{$review[0]}' <form action='' method='post'><input type='hidden' name='delete' value='submit'/> <input type='hidden' name='review_id' value={$review[2]}/><button type='submit' class='btn btn-danger'>x</button> </form>
                         </div>";
                 };
                 return $str;
@@ -137,8 +138,11 @@
 
             ?>
 
+        
+
 
         <?php     
+            // When a review is submitted.
             if (isset($_POST['action'])) {
                 $reviewSubmitted = $_POST['review'];
                 $driver_id = $_POST['driver_id'];
@@ -153,6 +157,17 @@
                 header('Location: review.php');
             };
         
+        ?>
+
+        <?php 
+            // When a review is deleted.
+            if (isset($_POST['delete'])) {
+                $review_id = $_POST['review_id'];
+
+                $query = mysqli_query($sql, "DELETE FROM reviews WHERE review_id = '{$review_id}'");
+
+                header('Location: review.php');
+            }
         ?>
 
 
