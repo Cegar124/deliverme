@@ -67,12 +67,11 @@
                             </div>
 
                             <div class="row mt-3">
-                                <div class="col-md-6"><label class="labels">City</label><input type="text" class="form-control" placeholder="country" value="" name="city"></div>
+                                <div class="col-md-6"><label class="labels">City</label><input type="text" class="form-control" placeholder="city" value="" name="city"></div>
                                 <div class="col-md-6"><label class="labels">State</label><input type="text" class="form-control" value="" placeholder="state" name="state"></div>
                             </div>
 
-                            <!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> -->
-                            <input type="submit" value="Update Information">
+                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
                         </form>
                     </div>
                 </div>

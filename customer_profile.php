@@ -36,6 +36,33 @@
             $zipcode = $result['zipcode'];
         ?>
 
+        <?php
+            //if delete button
+            if(isset($_POST["delete"])){   
+
+                //delete all associated list entries
+                $query = mysqli_query($sql, "SELECT * FROM orders WHERE cus_id='{$user_id}'");  
+                while ($row = mysqli_fetch_assoc($query)) {
+                    $order_id = $row["order_id"];
+                    echo $order_id;
+
+                    $query2 = mysqli_query($sql, "DELETE FROM list WHERE order_id='{$order_id}'");
+                }
+                
+                //delete all associated order entries
+                $query = mysqli_query($sql, "DELETE FROM orders WHERE cus_id='{$user_id}'");  
+                
+                //delete from customers
+                $query = mysqli_query($sql, "DELETE FROM customers WHERE cus_id='{$user_id}'");
+
+                //delete from users
+                $query = mysqli_query($sql, "DELETE FROM users WHERE user_id='{$user_id}'");
+
+                header("Location: index.php");
+                exit;
+            }
+        ?>
+
         <div class="container emp-profile" style= "padding-top: 100px;">
             <form method="post">
 
@@ -87,7 +114,11 @@
 
                 <div class="row" style= "padding-top: 20px;">
                     <div class="col-md-2">
-                        <a class="btn btn-sm" href="edit_profile.php"> Edit Profile
+                        <a class="btn btn-sm" href="edit_profile.php"> Edit Profile <br>
+
+                        <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+		                    <input type="submit" name="delete" value="Delete Account">
+	                    </form>
                     </div>
                 </div>
 
