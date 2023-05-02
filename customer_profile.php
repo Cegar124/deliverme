@@ -1,11 +1,5 @@
 <?php include('include/config.php'); ?>
 
-<?php
-    $cookie_name = "user_id";
-    $cookie_value = $user_id;
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-?>
-
 <html>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -18,16 +12,10 @@
 
         <!-- content -->
         <?php
-            //getting user_id that matches to username and password
-
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            
-            $query = mysqli_query($sql, "SELECT * FROM users WHERE username='{$username}' AND password='{$password}' ");
+            $user_id = $_GET["user_id"];
+            $query = mysqli_query($sql, "SELECT * FROM users WHERE user_id='{$user_id}'");
 
             $row = mysqli_fetch_assoc($query);
-
-            $user_id = $row['user_id'];
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
         ?>
@@ -44,11 +32,9 @@
             $st_name = $result['st_name'];
             $apt = $result['apt_number'];
             $city = $result['city'];
-            $state = $result['state'];
+            $state = $result['state_name'];
             $zipcode = $result['zipcode'];
         ?>
-
-
 
         <div class="container emp-profile" style= "padding-top: 100px;">
             <form method="post">
@@ -90,7 +76,7 @@
                             <div class="col-md-6">
                                 <p> <?php echo $st_name?> 
                                 <?php echo $apt_number?>
-                                <?php echo $city?>, <?php echo $state?> <?php echo $zipcode?> </p>
+                                <?php echo $city?>, <?php echo $state_name?> <?php echo $zipcode?> </p>
                             </div>
 
                         </div>
