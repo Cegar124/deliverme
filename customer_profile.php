@@ -1,4 +1,11 @@
 <?php include('include/config.php'); ?>
+
+<?php
+    $cookie_name = "user_id";
+    $cookie_value = $user_id;
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+?>
+
 <html>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -24,7 +31,6 @@
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
         ?>
-
 
         <?php
             $query = mysqli_query($sql, "SELECT * FROM customers WHERE cus_id='{$user_id}' ");
@@ -95,7 +101,7 @@
 
                 <div class="row" style= "padding-top: 20px;">
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <a class="btn btn-sm" href="edit_profile.php"> Edit Profile
                     </div>
                 </div>
 
