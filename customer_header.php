@@ -1,7 +1,11 @@
+<?php include('include/config.php'); ?>
+
 <header>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
+
+    <?php $user_id = $_GET["user_id"]; ?>
 
     <body>
 
@@ -9,7 +13,7 @@
 
         <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
-            <a class="nav-link" href="customer_profile.php">Profile</a>
+            <a class="nav-link" href="customer_profile.php?user_id=<?php echo $user_id; ?>">Profile</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Order</a>

@@ -7,7 +7,7 @@
     <body>
         
         <!-- header -->
-        <?php include('customer_header.php'); ?>
+        <?php include('driver_header.php'); ?>
 
         <!-- content -->
         <?php
@@ -21,8 +21,8 @@
 
         <?php
             $query = mysqli_query($sql, " SELECT COUNT(order_id) FROM orders WHERE driver_id='{$user_id}'");
-            $result = mysqli_fetch_assoc($query);
-
+            $row = mysqli_fetch_array($query);
+            $count = $row[0];
         ?>
         <?php
             //if delete button
@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <p> <?php echo $result ?> </p>
+                                <p> <?php echo $count ?> </p>
                             </div>
 
                         </div>
