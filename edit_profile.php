@@ -16,6 +16,8 @@
 
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Retrieve form data
+                $username = $_POST["username"];
+                $password = $_POST["password"];
                 $first_name = $_POST["first_name"];
                 $last_name = $_POST["last_name"];
                 $street_name = $_POST["street_name"];
@@ -34,7 +36,7 @@
                 $query = mysqli_query($sql, "UPDATE address SET st_name='{$street_name}', zipcode='{$zipcode}', city='{$city}', state_name='{$state}', apt_num='{$apt_num}' WHERE address_id='{$address_id}'");
 
                 // update user's names
-                $query2 = mysqli_query($sql, "UPDATE users SET first_name='{$first_name}', last_name='{$last_name}' WHERE user_id='{$user_id}'");
+                $query2 = mysqli_query($sql, "UPDATE users SET first_name='{$first_name}', last_name='{$last_name}', username='{$username}', password='{$password}' WHERE user_id='{$user_id}'");
 
                 header("Location: customer_profile.php?user_id=$user_id");
                 exit;
@@ -54,6 +56,11 @@
                     </div>
 
                         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="labels">Username</label><input type="text" class="form-control" placeholder="username" value="" name="username"></div>
+                                <div class="col-md-6"><label class="labels">Password</label><input type="password" class="form-control" value="" placeholder="password"  name="password"></div>
+                            </div>
 
                             <div class="row mt-3">
                                 <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="" name="first_name"></div>

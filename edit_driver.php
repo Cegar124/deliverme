@@ -51,7 +51,7 @@
 
                             <div class="row mt-3">
                                 <div class="col-md-6"><label class="labels">Username</label><input type="text" class="form-control" placeholder="first name" value="" name="username"></div>
-                                <div class="col-md-6"><label class="labels">Password</label><input type="text" class="form-control" value="" placeholder="surname" name="password"></div>
+                                <div class="col-md-6"><label class="labels">Password</label><input type="password" class="form-control" value="" placeholder="surname" name="password"></div>
                             </div>
 
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
