@@ -11,16 +11,10 @@
 
         <!-- content -->
         <?php
-            //getting user_id that matches to username and password
-
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            
-            $query = mysqli_query($sql, "SELECT * FROM users WHERE username='{$username}' AND password='{$password}' ");
+            $user_id = $_GET["user_id"];
+            $query = mysqli_query($sql, "SELECT * FROM users WHERE user_id='{$user_id}'");
 
             $row = mysqli_fetch_assoc($query);
-
-            $user_id = $row['user_id'];
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
         ?>
@@ -29,6 +23,22 @@
             $query = mysqli_query($sql, " SELECT COUNT(order_id) FROM orders WHERE driver_id='{$user_id}'");
             $result = mysqli_fetch_assoc($query);
 
+        ?>
+        <?php
+            //if delete button
+            if(isset($_POST["delete"])){               
+                //delete all associated order entries
+                $query = mysqli_query($sql, "DELETE FROM orders WHERE driver_id='{$user_id}'");  
+                
+                //delete from drivers
+                $query = mysqli_query($sql, "DELETE FROM drivers WHERE driver_id='{$user_id}'");
+
+                //delete from users
+                $query = mysqli_query($sql, "DELETE FROM users WHERE user_id='{$user_id}'");
+
+                header("Location: index.php");
+                exit;
+            }
         ?>
 
         <div class="container emp-profile" style= "padding-top: 100px;">
@@ -78,11 +88,15 @@
                     
                 </div>
 
-                <!-- <div class="row" style= "padding-top: 20px;">
+                <div class="row" style= "padding-top: 20px;">
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <a class="btn btn-sm" href="edit_driver.php?user_id=<?php echo $user_id; ?>">Edit Profile</a>
+
+                        <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+		                    <input type="submit" name="delete" value="Delete Account">
+	                    </form>
                     </div>
-                </div> -->
+                </div>
 
             </form>           
         </div>
