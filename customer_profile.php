@@ -114,7 +114,7 @@
 
                 <div class="row" style= "padding-top: 20px;">
                     <div class="col-md-2">
-                        <a class="btn btn-sm" href="edit_profile.php"> Edit Profile <br>
+                        <a class="btn btn-sm" href="edit_profile.php?user_id=<?php echo $user_id; ?>"> Edit Profile <br>
 
                         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
 		                    <input type="submit" name="delete" value="Delete Account">
