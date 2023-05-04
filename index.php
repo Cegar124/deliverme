@@ -1,3 +1,4 @@
+
 <?php include('include/config.php'); ?>
 <html>
 
@@ -9,7 +10,7 @@
         
 
         <!-- menu -->
-        <?php include('templates/menu.php'); ?>
+        <!-- <?php include('./templates/menu.php'); ?> -->
 
         <!-- content -->
 
@@ -18,7 +19,7 @@
 
                 <div class="d-flex justify-content-center">
                 
-                    <form action="customer_profile.php" method="post">
+                    <form action="./customer_profile.php" method="post">
 
                         <h3>Customer Login</h3>
 
@@ -43,13 +44,13 @@
                         <div class="d-flex justify-content-center" >
                             
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="driver_login.php">Driver</button>
+                                <a class="btn btn-sm" href="./driver_login.php">Driver</button>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="#">Admin</button>
+                                <a class="btn btn-sm" href="./admin_login.php">Admin</button>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="register.php">Don't have account?</button>
+                                <a class="btn btn-sm" href="./register.php">Don't have account?</button>
                             </div>
                         </div>
 

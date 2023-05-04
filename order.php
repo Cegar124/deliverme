@@ -11,7 +11,7 @@
         
 
         <!-- menu -->
-        <?php include('templates/menu.php'); ?>
+        <!-- <?php include('templates/menu.php'); ?> -->
 
         <!-- content -->
 

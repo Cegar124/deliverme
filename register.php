@@ -9,7 +9,7 @@
         
 
         <!-- menu -->
-        <?php include('templates/menu.php'); ?>
+        <!-- <?php include('templates/menu.php'); ?> -->
 
         <!-- content -->
 
@@ -90,7 +90,7 @@
                         $password = $_POST['password'];
                         $st_name = $_POST['street'];
                         $city = $_POST['city'];
-                        $state = $_POST['state'];
+                        $State = $_POST['State'];
                         $country = $_POST['country'];
                         $apt = $_POST['aptnum'];
                         $zipcode = $_POST['zipcode'];
