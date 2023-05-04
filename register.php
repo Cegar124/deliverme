@@ -110,9 +110,10 @@
                         // insert user information to database
                         $query2 = mysqli_query($sql, "INSERT INTO users (user_id, username, password, first_name, last_name) VALUES ('{$user_id}', '{$username}', '{$password}', '{$first_name}', '{$last_name}') ");
 
-                        $query3 = mysqli_query($sql, "INSERT INTO address (address_id, st_name, zipcode, city, state, country, apt_num) VALUES ('{$user_id}', '{$st_name}', '{$zipcode}', '{$city}', '{$state}', '{$country}', '{$apt}') ");
-
+                        
                         if ($user_type == "customer") {
+                            $query3 = mysqli_query($sql, "INSERT INTO address (address_id, st_name, zipcode, city, state, country, apt_num) VALUES ('{$user_id}', '{$st_name}', '{$zipcode}', '{$city}', '{$state}', '{$country}', '{$apt}') ");
+                            
                             $query4 = mysqli_query($sql, "INSERT INTO customers (cus_id, address_id) VALUES ('{$user_id}', '{$user_id}')");
                         } else if ($user_type == "driver") {
                             $query4 = mysqli_query($sql, "INSERT INTO drivers (driver_id) VALUES ('{$user_id}')");
