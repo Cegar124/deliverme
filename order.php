@@ -1,4 +1,100 @@
-<?php include('include/config.php'); ?>
+
+<?php include('include/config.php'); 
+?>
+<?php
+    if (isset($_POST['action'])) {
+    // Parse user info when submit is pressed.
+    $name = $_POST['item'];
+    $quantity = $_POST['quantity'];
+    //$store_name = $_POST['store']; /// I dont know if this is correct// do we need to add an attribute called name in store ot have store name
+    $time = $_POST['time'];
+    $date = $_POST['date'];
+    $st_name = $_POST['street'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $country = $_POST['country'];
+    $apt_num = $_POST['apt_num'];
+    $zipcode = $_POST['zipcode'];
+    //getting user_id that matches to username and password
+    $username = $_POST["username"];
+
+    
+                        
+    
+    // Get the last order_id and set next order_id
+    $query = mysqli_query($sql, "SELECT MAX(order_id) FROM orders");//changed form orders to list
+    $row = mysqli_fetch_assoc($query);
+    $order_id = $row['MAX(order_id)'] + 1;
+    
+
+    // got do the above step for store id
+    $query1 = mysqli_query($sql, "SELECT MAX(store_id) FROM stores");
+    $row1 = mysqli_fetch_assoc($query1);
+    $store_id = $row1['MAX(store_id)'] + 1;
+    
+
+    // got do the above step for item id
+    $query2 = mysqli_query($sql, "SELECT MAX(item_id) FROM items");
+    $row2 = mysqli_fetch_assoc($query2);
+    $item_id = $row2['MAX(item_id)'] + 1;
+    
+
+    // do above step for address id
+    $query3 = mysqli_query($sql, "SELECT MAX(address_id) FROM address");
+    $row3 = mysqli_fetch_assoc($query3);
+    $address_id = $row3['MAX(address_id)'] + 1;
+    
+
+    //getting user_id that matches to username
+    $query4 = mysqli_query($sql, "SELECT user_id FROM users WHERE username='{$username}'");
+    $row4 = mysqli_fetch_assoc($query4);
+    $cus_id = $row4['user_id'];
+    //redirect to user_orders.php with the customer ID as a parameter
+//////////////////////////////////
+   /// $driver_id = '1';
+//////////////////////////////////
+$query = mysqli_query($sql, "SELECT driver_id FROM drivers ORDER BY RAND() LIMIT 1");//changed form orders to list
+$row = mysqli_fetch_assoc($query);
+$driver_id = $row['driver_id'];
+
+
+
+   
+
+    // insert user information to database
+    $query5 = mysqli_query($sql, "INSERT INTO address (address_id, st_name, zipcode, city, state, country, apt_num) VALUES ('{$address_id}', '{$st_name}', '{$zipcode}', '{$city}', '{$state}', '{$country}', '{$apt_num}') ");
+    
+    $query6 = mysqli_query($sql, "INSERT INTO stores (store_id, address_id) VALUES ('{$store_id}', '{$address_id}')");
+    
+    $query7 = mysqli_query($sql, "INSERT INTO items (item_id, name) VALUES ('{$item_id}', '{$name}')");
+    print "<h2>9</h2>";
+    print "<h2> $item_id</h2>";
+    print "<h2> $order_id</h2>";
+    print "<h2> $quantity</h2>";
+
+    /// trying what kim tried
+    
+    
+    
+   
+/// query8 isnt working and i dont know why the quantity is not being added
+/// since query 8 isnt working query9 isnt working
+// its becasue it isnt not saving the order id after making the order
+
+/// inputiin glist as the name of the lists in orders
+    $query8 = mysqli_query($sql, "INSERT INTO orders (order_id, cus_id, driver_id, store_id, list, date, time) VALUES ('{$order_id}', '{$cus_id}','{$driver_id}', '{$store_id}', '{$name}', '{$date}', '{$time}')"); 
+    
+
+    $query9 = mysqli_query($sql, "INSERT INTO list (order_id, item_id, quantity) VALUES ('{$order_id}', '{$item_id}', '{$quantity}')");
+    
+     // Redirect to myuser.php.
+     header('Location: delete_order_name.php');
+     exit;
+
+
+    }
+    
+    ?>
 
 <html>
 
@@ -8,12 +104,22 @@
 
     <body>
         
-        
+
 
         <!-- menu -->
-        <!-- <?php include('templates/menu.php'); ?> -->
+        <?php include('templates/menu.php'); ?>
 
         <!-- content -->
+       
+       <?php
+       session_start();
+       $user_id= $_SESSION['user_id'];
+       ?>
+       
+  
+
+        
+
 
         <div class="container">
             <div class="align-items-center" style="padding-top: 200px">
@@ -22,27 +128,31 @@
                 
                     <form action="" method="post">
                         <input type="hidden" name="action" value="submit"/>
-                        <h3>Order List</h3>
+
+                        <h3>Order Page</h3>
+
                         <h5>Item and Quantity</h5>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleInputItem1">Item</label>
-                                <input type="text" name="name" class="form-control" placeholder="Enter Item Name" required>
+
+                                <input type="text" name="item" class="form-control" id="exampleInputItem1" aria-describedby="itemHelp" placeholder="Enter Item Name" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="exampleInputQuatity1">Quantity</label>
-                                <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity" required>
+                                <label for="exampleInputQuantity1">Quantity</label>
+                                <input type="number" name="quantity" class="form-control" id="exampleInputQuantity1" aria-describedby="quantityHelp" placeholder="Enter Quantity" required>
                             </div>
                         </div>
                         <hr>
-                        <h5>Store Information</h5>
+                        <h5>Username</h5>
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="exampleInputStorename1">Store Name</label>
-                                <input type="text" name="store" class="form-control"  placeholder="Enter Store Name" required>
+                                <label for="exampleInputUsername1">Username</label>
+                                <input type="username" name="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Enter Username" required>
                             </div>
-                            
                         </div>
+                        <hr>
+
                         <h5>Address</h5>
                         <div>
                             <div class="form-group">
@@ -76,96 +186,33 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleInputDate1">Date</label>
-                                <input type="date" name="date" class="form-control"  placeholder="Enter Date" required>
+
+                                <input type="date" name="date" class="form-control" id="exampleInputDate1" placeholder="Enter Date" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleInputTime1">Time</label>
-                                <input type="time" name="time" class="form-control" placeholder="Enter Time" required>
+                                <input type="time" name="time" class="form-control" id="exampleInputTime1" placeholder="Enter Time" required>
                             </div>
                         </div>
-                        <h5>Username</h5>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="exampleInputStorename1">Username</label>
-                                <input type="username" name="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Enter Username" required>
-                            </div>
-                            
-                        </div>
+
+
                         <div class="d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px" >
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                         
-                </div>        
-                        
-
-                <?php
-                    if (isset($_POST['action'])) {
-                        // Parse user info when submit is pressed.
-                        $name = $_POST['name'];
-                        $quantity = $_POST['quantity'];
-                        //$store_name = $_POST['store']; /// I dont know if this is correct// do we need to add an attribute called name in store ot have store name
-                        $time = $_POST['time'];
-                        $date = $_POST['date'];
-                        $st_name = $_POST['street'];
-                        $city = $_POST['city'];
-                        $state = $_POST['state'];
-                        $country = $_POST['country'];
-                        $apt = $_POST['aptnum'];
-                        $zipcode = $_POST['zipcode'];
-                        //getting user_id that matches to username and password
-
-                        $username = $_POST["username"];
-
-
-                         // Get the last order_id and set next order_id
-                        $query = mysqli_query($sql, "SELECT MAX(order_id) FROM orders");
-                        $row = mysqli_fetch_assoc($query);
-                        $order_id = $row['MAX(order_id)'] + 1;
-
-                         // got do the above step for store id
-                        $query1 = mysqli_query($sql, "SELECT MAX(store_id) FROM stores");
-                        $row1 = mysqli_fetch_assoc($query1);
-                        $store_id = $row1['MAX(store_id)'] + 1;
-
-                         // got do the above step for item id
-                        $query2 = mysqli_query($sql, "SELECT MAX(item_id) FROM items");
-                        $row2 = mysqli_fetch_assoc($query2);
-                        $item_id = $row2['MAX(item_id)'] + 1;
-
-                        // do above step for address id
-                        $query3 = mysqli_query($sql, "SELECT MAX(address_id) FROM address");
-                        $row3 = mysqli_fetch_assoc($query3);
-                        $address_id = $row3['MAX(address_id)'] + 1;
-                        //getting user_id that matches to username
-                        $query8 = mysqli_query($sql, "SELECT user_id FROM users WHERE username='{$username}'");
-                        $row = mysqli_fetch_assoc($query8);
-                        $cus_id = $row4['user_id'];
-
-
-                        // insert user information to database
-                        $query4 = mysqli_query($sql, "INSERT INTO address (address_id, st_name, zipcode, city, state, country, apt_num) VALUES ('{$store_id}', '{$st_name}', '{$zipcode}', '{$city}', '{$state}', '{$country}', '{$apt}') ");
-                        $query5 = mysqli_query($sql, "INSERT INTO items (item_id, name) VALUES ('{$item_id}', '{$name}')");
-                        $query6 = mysqli_query($sql, "INSERT INTO stores (store_id ,address_id) VALUES ('{$store_id}', '{$address_id}')");
-                        
-                        $query7 = mysqli_query($sql, "INSERT INTO list (order_id, item_id, quantity) VALUES ('{$order_id}', '{$item_id}', '{$quantity}')");
-                        $conn = "INSERT INTO orders (order_id, cus_id, driver_id, store_id, list, date, time) VALUES ('{$order_id}', '{$cus_id}','{$driver_id}', '{$store_id}', '{$query7}', '{$date}', '{$time}')";
-
-                        $query9 = mysqli_query($sql, $conn);
 
                         
-                        // fix the row names please
-                        if (!$query9) {
-                            printf("Error message: %s\n", mysqli_error($sql));
-                        }
                         
 
+                    </form>
+                </div>
 
+                
+                
+    
 
-                       
-                    }
-                ?>
-            </div>   
-            
+            </div>
+
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
