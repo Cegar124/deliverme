@@ -30,6 +30,7 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <?php include('driver_header.php'); ?>
 
     <div class="container">
         <div class="row">

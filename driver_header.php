@@ -14,10 +14,10 @@
             <a class="nav-link" href="driver_profile.php?user_id=<?php echo $user_id?>">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Order</a>
+            <a class="nav-link" href="select_order_driver.php?user_id=<?php echo $user_id?>">Order</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Reviews</a>
+            <a class="nav-link" href="driver_review.php?user_id=<?php echo $user_id?>">Reviews</a>
         </li>
         </ul>
 

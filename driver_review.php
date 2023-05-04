@@ -11,11 +11,17 @@
 
         <?php
             // Getting user information from session
+            $user_id = $_GET["user_id"];
+            $query = mysqli_query($sql, "SELECT * FROM users WHERE user_id='{$user_id}'");
+
+            $row = mysqli_fetch_assoc($query);
+            $first_name = $row['first_name'];
+            $last_name = $row['last_name'];
             session_start();
 
-            $user_id = $_SESSION['user_id'];
-            $first_name = $_SESSION['first_name'];
-            $last_name = $_SESSION['last_name'];
+            // $user_id = $_SESSION['user_id'];
+            // $first_name = $_SESSION['first_name'];
+            // $last_name = $_SESSION['last_name'];
         ?>
 
         <?php
