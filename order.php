@@ -107,7 +107,6 @@ $driver_id = $row['driver_id'];
         <?php include('templates/menu.php'); ?>
 
         <!-- content -->
-
         <?php include('customer_header.php'); ?>
        
        <?php
