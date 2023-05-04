@@ -44,7 +44,7 @@
             $query = mysqli_query($sql, "SELECT * FROM address WHERE address_id= '{$address_id}'");
             $result = mysqli_fetch_assoc($query);
             $st_name = $result['st_name'];
-            $apt = $result['apt_number'];
+            $apt_number = $result['apt_number'];
             $city = $result['city'];
             $state = $result['state'];
             $zipcode = $result['zipcode'];
