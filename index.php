@@ -1,3 +1,4 @@
+
 <?php include('include/config.php'); ?>
 <html>
 
@@ -9,7 +10,27 @@
         
 
         <!-- menu -->
-        <?php include('templates/menu.php'); ?>
+        <!-- <?php include('./templates/menu.php'); ?> -->
+
+        <?php
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                //retrieve form data
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+                
+                $query = mysqli_query($sql, "SELECT * FROM users WHERE username='{$username}' AND password='{$password}' ");
+    
+                $row = mysqli_fetch_assoc($query);
+    
+                $user_id = $row['user_id'];
+                $first_name = $row['first_name'];
+                $last_name = $row['last_name'];
+
+                header("Location: customer_profile.php?user_id=$user_id");
+                exit;
+            }
+
+        ?>
 
         <!-- content -->
 
@@ -18,7 +39,7 @@
 
                 <div class="d-flex justify-content-center">
                 
-                    <form action="customer_profile.php" method="post">
+                    <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
 
                         <h3>Customer Login</h3>
 
@@ -43,13 +64,13 @@
                         <div class="d-flex justify-content-center" >
                             
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="driver_login.php">Driver</button>
+                                <a class="btn btn-sm" href="./driver_login.php">Driver</button>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="#">Admin</button>
+                                <a class="btn btn-sm" href="./admin_login.php">Admin</button>
                             </div>
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="register.php">Don't have account?</button>
+                                <a class="btn btn-sm" href="./register.php">Don't have account?</button>
                             </div>
                         </div>
 

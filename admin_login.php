@@ -9,61 +9,65 @@
         
 
         <!-- menu -->
-        <?php include('templates/menu.php'); ?>
+        <!-- <?php include('templates/menu.php'); ?> -->
 
         <!-- content -->
-        <?php
-    
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-                //retrieve form data
-                $username = $_POST["username"];
-                $password = $_POST["password"];
-                
-                $query = mysqli_query($sql, "SELECT * FROM users WHERE username='{$username}' AND password='{$password}' ");
-    
-                $row = mysqli_fetch_assoc($query);
-    
-                $user_id = $row['user_id'];
-                $first_name = $row['first_name'];
-                $last_name = $row['last_name'];
-
-
-                header("Location: driver_profile.php?user_id=$user_id");
-                exit;
-            }
-
-        ?>
 
 
         <div class="container">
             <div class="align-items-center" style="padding-top: 200px">
 
                 <div class="d-flex justify-content-center">
-                    <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <form action="" method="POST">
 
-                        <h3>Driver Login</h3>
+                        <h3>Admin Login</h3>
 
                         <div class="form-group">
                             <label for="exampleInputUsername1">Username</label>
-                            <input type="username" name="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Enter Username">
+                            <input type="username" name="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Enter Username" required>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
                         </div>
 
                         <div class="d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px" >
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit_admin_login" class="btn btn-primary" name="submit_admin_login">Submit</button>
                         </div>
 
 
                     </form>
                 </div>
 
+                
             </div>
         </div>
+        
+        <?php
+            //Checking username and password
+            if(isset($_POST['submit_admin_login'])) {
+                $admin_route = "./admin_profile.php";
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+                $showAlert = false;
+                
+                $query = mysqli_query($sql, "SELECT * FROM admins WHERE username='{$username}' AND password='{$password}' ");
+                $result = mysqli_fetch_assoc($query);
+                if ($result==0) {
+                    // username, password incorrect
+                    echo " <div> <p> invalid credentials</p> </div> ";
+                    $admin_route = "./admin_login.php";
+                    header('Location: '.$admin_route);
+                    die();
+                }
+                else {
+                    // reroute to admin landing page
+                    header('Location: '.$admin_route);
+                    die(); // stop any other code from executing
+                }
+            }
+            ?>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

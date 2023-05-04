@@ -1,3 +1,4 @@
+
 <?php include('include/config.php'); 
 ?>
 <?php
@@ -94,6 +95,7 @@ $driver_id = $row['driver_id'];
     }
     
     ?>
+
 <html>
 
     <head>
@@ -102,6 +104,7 @@ $driver_id = $row['driver_id'];
 
     <body>
         
+
 
         <!-- menu -->
         <?php include('templates/menu.php'); ?>
@@ -117,6 +120,7 @@ $driver_id = $row['driver_id'];
 
         
 
+
         <div class="container">
             <div class="align-items-center" style="padding-top: 200px">
 
@@ -124,11 +128,14 @@ $driver_id = $row['driver_id'];
                 
                     <form action="" method="post">
                         <input type="hidden" name="action" value="submit"/>
+
                         <h3>Order Page</h3>
+
                         <h5>Item and Quantity</h5>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleInputItem1">Item</label>
+
                                 <input type="text" name="item" class="form-control" id="exampleInputItem1" aria-describedby="itemHelp" placeholder="Enter Item Name" required>
                             </div>
                             <div class="form-group col-md-6">
@@ -145,6 +152,7 @@ $driver_id = $row['driver_id'];
                             </div>
                         </div>
                         <hr>
+
                         <h5>Address</h5>
                         <div>
                             <div class="form-group">
@@ -178,6 +186,7 @@ $driver_id = $row['driver_id'];
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleInputDate1">Date</label>
+
                                 <input type="date" name="date" class="form-control" id="exampleInputDate1" placeholder="Enter Date" required>
                             </div>
                             <div class="form-group col-md-6">
@@ -186,10 +195,12 @@ $driver_id = $row['driver_id'];
                             </div>
                         </div>
 
+
                         <div class="d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px" >
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                         
+
                         
                         
 
@@ -201,6 +212,7 @@ $driver_id = $row['driver_id'];
     
 
             </div>
+
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
