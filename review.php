@@ -53,8 +53,11 @@
                     $review = array();
                     $review_text = $subRow['review'];
                     $cus_id = $subRow['cus_id'];
+                    $subSubQuery = mysqli_query($sql, "SELECT username FROM users WHERE user_id = '{$cus_id}'");
+                    $subSubRow = mysqli_fetch_assoc($subSubQuery);
+                    $cus_username = $subSubRow['username'];
                     $review_id = $subRow['review_id'];
-                    array_push($review, $review_text, $cus_id, $review_id);
+                    array_push($review, $review_text, $cus_username, $review_id);
                     array_push($reviews, $review);
                 }
 
@@ -63,6 +66,7 @@
             };
 
         ?>
+
 
         <?php 
         /*
@@ -136,6 +140,10 @@
                                 <input type='hidden' name='review_id' value={$review[2]}/>
                                 <input type='text' placeholder='Leave a review' name='review' value={$review[0]}/>
                                 <button type='submit'>Done</button>
+                            </form>
+                            <form action='' method='post'>
+                                <input type='hidden' name='cancel' value='submit'/>
+                                <button type='submit'>Cancel</button>
                             </form>
                         </div>";
                     } else {
@@ -215,7 +223,12 @@
             }
         ?>
 
-
+        <?php
+            if (isset($_POST['cancel'])) {
+                $_SESSION['editting_review'] = -1;
+                header('Location: review.php');
+            }
+        ?>
 
         <div class="container emp-profile" style= "padding-top: 100px;">
                 <div class="row">
