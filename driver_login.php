@@ -12,13 +12,35 @@
         <?php include('templates/menu.php'); ?>
 
         <!-- content -->
+        <?php
+    
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+                //retrieve form data
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+                
+                $query = mysqli_query($sql, "SELECT * FROM users WHERE username='{$username}' AND password='{$password}' ");
+    
+                $row = mysqli_fetch_assoc($query);
+    
+                $user_id = $row['user_id'];
+                $first_name = $row['first_name'];
+                $last_name = $row['last_name'];
+
+
+                header("Location: driver_profile.php?user_id=$user_id");
+                exit;
+            }
+
+        ?>
 
 
         <div class="container">
             <div class="align-items-center" style="padding-top: 200px">
 
                 <div class="d-flex justify-content-center">
-                    <form action="driver_profile.php" method="post">
+                    <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
 
                         <h3>Driver Login</h3>
 
