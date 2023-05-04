@@ -19,7 +19,7 @@
             <a class="nav-link" href="order.php?user_id=<?php echo $user_id; ?>">Order</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="review.php?user_id=<?php echo $user_id; ?>">Reviews</a>
+            <a class="nav-link" href="review.php">Reviews</a>
         </li>
         </ul>
 
