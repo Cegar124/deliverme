@@ -18,6 +18,10 @@
             $row = mysqli_fetch_assoc($query);
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
+
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['first_name'] = $first_name;
+            $_SESSION['last_name'] = $last_name;
         ?>
 
         <?php
@@ -30,7 +34,7 @@
             $query = mysqli_query($sql, "SELECT * FROM address WHERE address_id= '{$address_id}'");
             $result = mysqli_fetch_assoc($query);
             $st_name = $result['st_name'];
-            $apt = $result['apt_number'];
+            $apt_number = $result['apt_number'];
             $city = $result['city'];
             $state = $result['state_name'];
             $zipcode = $result['zipcode'];
