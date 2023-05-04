@@ -79,7 +79,7 @@
             9: review : [review text, cus id, review_id]
         */
             
-            function renderOrders($orders) {
+            function renderOrders($orders, $review_id) {
                 $str = '';
                 foreach ($orders as $order) {
                     $str = $str.
@@ -107,7 +107,7 @@
                                     <h5>Reviews</h5>
                                 </div>
 
-                                ".renderReviews($order[9])."
+                                ".renderReviews($order[9], $review_id)."
                                 <form action='' method='post'>
                                     <input type='hidden' name='action' value='submit'/>
                                     <input type='hidden' value={$order[0]} name='driver_id'/>
@@ -122,16 +122,41 @@
                 return $str;
             };
 
-            function renderReviews($reviews) {
+            function renderReviews($reviews, $review_id) {
                 $str = '';
                 foreach ($reviews as $review) {
-                    $str = $str."
+                    if ($review[2] == $review_id) {
+                        $str = $str."
                         <div>
                             From user #{$review[1]}
                         </div>
                         <div class='d-flex align-items-start'>
-                            &nbsp;&nbsp;&nbsp;'{$review[0]}' <form action='' method='post'><input type='hidden' name='delete' value='submit'/> <input type='hidden' name='review_id' value={$review[2]}/><button type='submit' class='btn btn-danger'>x</button> </form>
+                            <form action='' method='post'>
+                                <input type='hidden' name='editSubmit' value='submit'/>
+                                <input type='hidden' name='review_id' value={$review[2]}/>
+                                <input type='text' placeholder='Leave a review' name='review' value={$review[0]}/>
+                                <button type='submit'>Done</button>
+                            </form>
                         </div>";
+                    } else {
+                        $str = $str."
+                            <div>
+                                From user #{$review[1]}
+                            </div>
+                            <div class='d-flex align-items-start'>
+                                &nbsp;&nbsp;&nbsp;'{$review[0]}' 
+                                <form action='' method='post'>
+                                    <input type='hidden' name='delete' value='submit'/>
+                                    <input type='hidden' name='review_id' value={$review[2]}/>
+                                    <button type='submit' class='btn btn-danger'>x</button> 
+                                </form>
+                                <form action='' method='post'>
+                                    <input type='hidden' name='edit' value='submit'/>
+                                    <input type='hidden' name='review_id' value={$review[2]}/>
+                                    <button type='submit' class='btn btn-danger'>Edit</button> 
+                                </form>
+                            </div>";
+                    }
                 };
                 return $str;
             };
@@ -170,6 +195,27 @@
             }
         ?>
 
+        <?php
+            // When edit button is clicked.
+            if (isset($_POST['edit'])) {
+                $_SESSION['editting_review'] = intval($_POST['review_id']);
+                header('Location: review.php');
+             }
+        ?>
+
+        <?php
+            // When edited review is submitted.
+            if (isset($_POST['editSubmit'])) {
+                $review_id = intval($_POST['review_id']);
+                $review = $_POST['review'];
+
+                $query = mysqli_query($sql, "UPDATE reviews SET review='{$review}' WHERE review_id = '{$review_id}'");
+                $_SESSION['editting_review'] = -1;
+                header('Location: review.php');
+            }
+        ?>
+
+
 
         <div class="container emp-profile" style= "padding-top: 100px;">
                 <div class="row">
@@ -183,17 +229,7 @@
                     </div>
 
                 </div>
-                <?php echo renderOrders($orders);?>
-                
-                
-                <form action="" method="post">
-                    <input type="hidden" name="action" value="submit"/>
-                    <div class="row" style= "padding-top: 20px;">
-                        <div class="col-md-2">
-                            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                        </div>
-                    </div>
-                </form>
+                <?php echo renderOrders($orders, $_SESSION['editting_review']);?>
         </div>
 
         
