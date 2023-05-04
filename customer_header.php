@@ -16,10 +16,10 @@
             <a class="nav-link" href="customer_profile.php?user_id=<?php echo $user_id; ?>">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Order</a>
+            <a class="nav-link" href="order.php?user_id=<?php echo $user_id; ?>">Order</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="review.php">Reviews</a>
+            <a class="nav-link" href="review.php?user_id=<?php echo $user_id; ?>">Reviews</a>
         </li>
         </ul>
 
