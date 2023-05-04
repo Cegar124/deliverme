@@ -14,6 +14,7 @@
             
         ?>
         <?php
+            session_start();
             //getting user_id that matches to username and password
 
             $username = $_POST["username"];
@@ -26,6 +27,10 @@
             $user_id = $row['user_id'];
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
+
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['first_name'] = $first_name;
+            $_SESSION['last_name'] = $last_name;
         ?>
 
 
