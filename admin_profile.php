@@ -11,6 +11,7 @@
         <?php 
 
         if(isset($_POST['submit_add_user_db'])) {
+            // adding user to database
             $username = $_POST['username'];
             $password = $_POST['password'];
             $first_name = $_POST['firstname'];
@@ -51,7 +52,7 @@
             
             echo "<input type='hidden' name='cus_id' value='$cus_id'>";
             
-            echo "<button type='submit_delete_user' name='submit_delete_user' onclick='return confirm(\"Are you sure you want to delete this entry?\")'> Delete user </button>";
+            echo "<button type='submit_delete_user' name='submit_delete_user'> Delete user </button>";
             
             echo "</form>";
 
@@ -66,29 +67,44 @@
 
         }
 
+            // button for adding a user
             echo "<br><br><form action='' method='POST'>";
-            // Use a hidden input field to send the 'id' value to the target PHP page
-            // Wrap the attribute value in a submit button
+
             echo "<button type='submit' name='submit_add_user'> Add a user </button>";
             
             echo "</form>";
 
         if (isset($_POST['submit_delete_user'])) {
-            $delete_query = "DELETE FROM orders WHERE cus_id = '$cus_id';";
-            $result = mysqli_query($sql, $delete_query);
-    
-            $delete_query = "DELETE FROM customers WHERE cus_id = '$cus_id';";
-            $result = mysqli_query($sql, $delete_query);
+            // deleting user from database and every bit of information 
+            $id = $_POST['cus_id'];
+            
+            $get_query = "SELECT * FROM customers WHERE cus_id='$id';";
+            $result = mysqli_query($sql,$get_query);
+            $row = mysqli_fetch_assoc($result);
+            $address_id = $row['address_id'];
 
-            $delete_query = "DELETE FROM drivers WHERE driver_id = '$cus_id';";
+            $delete_query = "DELETE FROM orders WHERE cus_id = '$id';";
+            $result = mysqli_query($sql, $delete_query);
+            
+            $delete_query = "DELETE FROM customers WHERE cus_id = '$id';";
+            $result = mysqli_query($sql, $delete_query);
+            
+            
+            $delete_query = "DELETE FROM address WHERE address_id =$address_id;";
+            $result = mysqli_query($sql, $delete_query);
+            
+            
+
+            $delete_query = "DELETE FROM drivers WHERE driver_id = '$id';";
             $result = mysqli_query($sql, $delete_query);
     
-            $delete_query = "DELETE FROM users WHERE user_id = '$cus_id';";
+            $delete_query = "DELETE FROM users WHERE user_id = '$id';";
             $result = mysqli_query($sql, $delete_query);
             // Execute the query
         }
 
         if (isset($_POST['submit_add_user'])) {
+            // button after typing up new user information
             echo '<form action="" method="post">';
             echo '<label for="username">username: </label>';
             echo '<input type="text" id="username" name="username"><br><br> ';
