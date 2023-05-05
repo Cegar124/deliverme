@@ -193,7 +193,7 @@
 
                 $query = mysqli_query($sql, "INSERT INTO reviews (review_id, driver_id, cus_id, review) VALUES ('{$review_id}', '{$driver_id}', '{$user_id}', '{$reviewSubmitted}')");
 
-                header('Location: review.php');
+                header("Location: review.php?user_id=$user_id");
             };
         
         ?>
@@ -205,7 +205,7 @@
 
                 $query = mysqli_query($sql, "DELETE FROM reviews WHERE review_id = '{$review_id}'");
 
-                header('Location: review.php');
+                header("Location: review.php?user_id=$user_id");
             }
         ?>
 
@@ -213,7 +213,7 @@
             // When edit button is clicked.
             if (isset($_POST['edit'])) {
                 $_SESSION['editting_review'] = intval($_POST['review_id']);
-                header('Location: review.php');
+                header("Location: review.php?user_id=$user_id");
              }
         ?>
 
@@ -225,14 +225,14 @@
 
                 $query = mysqli_query($sql, "UPDATE reviews SET review='{$review}' WHERE review_id = '{$review_id}'");
                 $_SESSION['editting_review'] = -1;
-                header('Location: review.php');
+                header("Location: review.php?user_id=$user_id");
             }
         ?>
 
         <?php
             if (isset($_POST['cancel'])) {
                 $_SESSION['editting_review'] = -1;
-                header('Location: review.php');
+                header("Location: review.php?user_id=$user_id");
             }
         ?>
 
