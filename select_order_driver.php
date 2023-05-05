@@ -1,3 +1,9 @@
+<!-- Samyam Pandey wokred on this page -->
+<!--  in this file when the driver logins and clicks on the order tabs it redirects to an orders page. 
+In this page it shows all the orders a that have not been selected by a driver. 
+It asks the driver to enter the order id for the order he wants and the driver username. This file uses SELECT. -->
+
+
 <?php
 
 
