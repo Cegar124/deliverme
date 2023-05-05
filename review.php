@@ -1,3 +1,17 @@
+<!-- 
+
+
+    This file displays the orders with their associated driver, store, and reviews. (SELECT)
+
+    Allows customer to leave reviews for their driver (INSERT)
+
+    Allows customer to edit their reviews (UPDATE)
+
+    Allows customer to delete their reviews (DELETE)
+
+    @author Soohwan Kim -> All sections
+-->
+
 <?php include('include/config.php'); ?>
 <html>
     <head>
@@ -89,7 +103,7 @@
             8: store zipcode
             9: review : [review text, cus username, review_id, cus_id]
         */
-            
+            // Renders list of orders of the customer.
             function renderOrders($orders, $review_id) {
                 $str = '';
                 foreach ($orders as $order) {
@@ -133,6 +147,7 @@
                 return $str;
             };
 
+            // Renders list of reviews for the driver
             function renderReviews($reviews, $review_id) {
                 $user_id = $_GET['user_id'];
                 $str = '';
@@ -192,6 +207,7 @@
 
         <?php     
             // When a review is submitted.
+            // Inserts customer review.
             if (isset($_POST['action'])) {
                 $reviewSubmitted = $_POST['review'];
                 $driver_id = $_POST['driver_id'];
@@ -210,6 +226,7 @@
 
         <?php 
             // When a review is deleted.
+            // Deletes customer review
             if (isset($_POST['delete'])) {
                 $review_id = $_POST['review_id'];
 
@@ -221,6 +238,7 @@
 
         <?php
             // When edit button is clicked.
+            // Switches the reivew text into input field.
             if (isset($_POST['edit'])) {
                 $_SESSION['editting_review'] = intval($_POST['review_id']);
                 header("Location: review.php?user_id=$user_id");
@@ -229,6 +247,7 @@
 
         <?php
             // When edited review is submitted.
+            // Updates customer review
             if (isset($_POST['editSubmit'])) {
                 $review_id = intval($_POST['review_id']);
                 $review = $_POST['review'];
@@ -240,6 +259,8 @@
         ?>
 
         <?php
+            // When cancel button is clicked
+            // Switches all edit input field back to review text.
             if (isset($_POST['cancel'])) {
                 $_SESSION['editting_review'] = -1;
                 header("Location: review.php?user_id=$user_id");

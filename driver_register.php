@@ -1,3 +1,14 @@
+<!--
+    This file displays a form to register a new driver which contains fields for their personal details and account information.
+    
+    When the user submits the form, it retrieves the input data and inserts it into the 'users' table of the database.
+
+    Then it connects the user entity with driver entity.
+
+    @author Soohwan Kim -> All sections
+
+ -->
+
 <?php include('include/config.php'); ?>
 <html>
 
@@ -52,6 +63,7 @@
                 </div>
 
                 <?php
+                    // Whent the form is submitted
                     if (isset($_POST['action'])) {
                         // Parse user info when submit is pressed.
                         $first_name = $_POST['firstname'];
@@ -67,11 +79,11 @@
                         // insert user information to database
                         $query2 = mysqli_query($sql, "INSERT INTO users (user_id, username, password, first_name, last_name) VALUES ('{$user_id}', '{$username}', '{$password}', '{$first_name}', '{$last_name}') ");
 
-                        
+                        // insert driver with current user id.
                         $query4 = mysqli_query($sql, "INSERT INTO drivers (driver_id) VALUES ('{$user_id}')");
                         
 
-                        // Redirect user to login page But doesn't work :(
+                        // Redirect user
                         header('Location: index.php');
                     }
                 ?>
