@@ -1,3 +1,9 @@
+<!-- Samyam Pandey worked on this -->
+<!-- This is the page that comes up after clicking submit in the order.php file. 
+In this page it just asks the user if they want to delete an order that was made and if they do. 
+It asks them to type in  their username. In this file it uses select to select the user id corresponding to the username the user typed. -->
+
+
 <?php
 include('include/config.php');
 if(isset($_POST['submit'])){
