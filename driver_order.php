@@ -1,3 +1,11 @@
+<!-- Samyam Pandey worked on this file -->
+<!-- This is the page that comes up after clicking submit in the select_order_driver.php. 
+In this page it shows the orders the driver selected from the orders that have not been completed. 
+This file uses SELECT, DELETE, UPDATE. 
+This file also asks the driver to type in the order id for the orders the driver has completed. 
+After the driver has clicked on the completed button it deletes the order from the orders table because the order is completed. -->
+
+
 <?php
 include('include/config.php');
 session_start();
