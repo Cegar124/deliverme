@@ -87,7 +87,8 @@ $driver_id = $row['driver_id'];
     $query9 = mysqli_query($sql, "INSERT INTO list (order_id, item_id, quantity) VALUES ('{$order_id}', '{$item_id}', '{$quantity}')");
     
      // Redirect to myuser.php.
-     header('Location: delete_order_name.php');
+     $user_id = $_GET['user_id'];
+     header("Location: delete_order_name.php?user_id=$user_id");
      exit;
 
 
@@ -111,7 +112,7 @@ $driver_id = $row['driver_id'];
        
        <?php
        session_start();
-       $user_id= $_SESSION['user_id'];
+       $user_id= $_GET['user_id'];
        ?>
        
   

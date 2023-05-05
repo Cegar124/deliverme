@@ -28,7 +28,8 @@
                 $first_name = $row['first_name'];
                 $last_name = $row['last_name'];
 
-
+                session_start();
+                $_SESSION['user_id'] = $user_id;
                 header("Location: driver_profile.php?user_id=$user_id");
                 exit;
             }

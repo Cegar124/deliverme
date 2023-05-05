@@ -86,7 +86,7 @@
 
                 $query = mysqli_query($sql, "UPDATE reviews SET reply = '{$reviewText}' WHERE review_id = '{$review_id}'");
 
-                header('Location: driver_review.php');
+                header("Location: driver_review.php?user_id=$user_id");
             }
         ?>
 
@@ -94,7 +94,7 @@
             if (isset($_POST['deleteReply'])) {
                 $review_id = intval($_POST['review_id']);
                 $query = mysqli_query($sql, "UPDATE reviews SET reply = NULL WHERE review_id = '{$review_id}'");
-                header('Location: driver_review.php');
+                header("Location: driver_review.php?user_id=$user_id");
             }
         ?>
 

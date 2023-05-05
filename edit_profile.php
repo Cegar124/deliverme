@@ -29,22 +29,21 @@
                $city = $_POST["city"];
                $state = $_POST["state"];
 
-
                //get user's original address to update it
                $query = mysqli_query($sql, "SELECT * from customers WHERE cus_id='{$user_id}'");
                $row = mysqli_fetch_assoc($query);
-
-
+               
+               
                $address_id = $row["address_id"];
-
-
+               
+               
+               
                //update user's original address
                $query = mysqli_query($sql, "UPDATE address SET st_name='{$street_name}', zipcode='{$zipcode}', city='{$city}', state_name='{$state}', apt_num='{$apt_num}' WHERE address_id='{$address_id}'");
-
+               
                // update user's names
                $query2 = mysqli_query($sql, "UPDATE users SET first_name='{$first_name}', last_name='{$last_name}', username='{$username}', password='{$password}' WHERE user_id='{$user_id}'");
-
-
+               
                header("Location: customer_profile.php?user_id=$user_id");
                exit;
            }

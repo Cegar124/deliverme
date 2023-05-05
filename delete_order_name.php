@@ -8,6 +8,19 @@ if(isset($_POST['submit'])){
     header('Location: customer_delete.php?user_id='.$user_id);
     exit();
 }
+
+function renderBackBtn() {
+    "<div class='container mt-5'>
+        <div class='row'>
+            <div class='col-md-6 offset-md-3'>
+                <a href='order.php?user_id={$user_id}' class='btn btn-secondary'>Back</a>
+            </div>
+        </div>
+    </div>";
+
+    return $str;
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +49,7 @@ if(isset($_POST['submit'])){
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <a href="order.php" class="btn btn-secondary">Back</a>
+                <a href="order.php?user_id=<?php echo $user_id; ?>" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </div>

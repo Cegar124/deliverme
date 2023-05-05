@@ -17,6 +17,7 @@
             $row = mysqli_fetch_assoc($query);
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
+            $username = $row['username'];
             session_start();
 
             // $user_id = $_SESSION['user_id'];
@@ -63,7 +64,7 @@
                     $subSubRow = mysqli_fetch_assoc($subSubQuery);
                     $cus_username = $subSubRow['username'];
                     $review_id = $subRow['review_id'];
-                    array_push($review, $review_text, $cus_username, $review_id);
+                    array_push($review, $review_text, $cus_username, $review_id, $cus_id);
                     array_push($reviews, $review);
                 }
 
@@ -86,7 +87,7 @@
             6: store city
             7: store state
             8: store zipcode
-            9: review : [review text, cus id, review_id]
+            9: review : [review text, cus username, review_id, cus_id]
         */
             
             function renderOrders($orders, $review_id) {
@@ -133,9 +134,18 @@
             };
 
             function renderReviews($reviews, $review_id) {
+                $user_id = $_GET['user_id'];
                 $str = '';
                 foreach ($reviews as $review) {
-                    if ($review[2] == $review_id) {
+                    if ($review[3] != $user_id) {
+                        $str = $str."
+                            <div>
+                                From user #{$review[1]}
+                            </div>
+                            <div class='d-flex align-items-start'>
+                                &nbsp;&nbsp;&nbsp;'{$review[0]}' 
+                            </div>";
+                    } else if ($review[2] == $review_id) {
                         $str = $str."
                         <div>
                             From user #{$review[1]}

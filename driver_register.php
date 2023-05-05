@@ -44,37 +44,6 @@
                                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
                             </div>
                         </div>
-                        <hr>
-                        <h5>Address</h5>
-                        <div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Street</label>
-                                <input type="text" name="street" class="form-control" id="exampleInputStreet1" placeholder="Street" required>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="exampleInputPassword1">City</label>
-                                    <input type="text" name="city" class="form-control" id="exampleInputCity1" placeholder="City" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="exampleInputPassword1">State</label>
-                                    <input type="text" name="State" class="form-control" id="exampleInputState1" placeholder="State" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="exampleInputPassword1">Country</label>
-                                    <input type="text" name="country" class="form-control" id="exampleInputCountry1" placeholder="Country" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Apartment Number</label>
-                                <input type="number" name="aptnum" class="form-control" id="exampleInputAptnum1" placeholder="Apt #" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Zipcode</label>
-                                <input type="number" name="zipcode" class="form-control" id="exampleInputZipcode1" placeholder="Zipcode" required>
-                            </div>
-                        </div>
-                        <hr>
 
                         <div class="d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px" >
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -89,12 +58,6 @@
                         $last_name = $_POST['lastname'];
                         $username = $_POST['username'];
                         $password = $_POST['password'];
-                        $st_name = $_POST['street'];
-                        $city = $_POST['city'];
-                        $State = $_POST['State'];
-                        $country = $_POST['country'];
-                        $apt = $_POST['aptnum'];
-                        $zipcode = $_POST['zipcode'];
 
                         // Get the last user_id and set next user_id
                         $query = mysqli_query($sql, "SELECT MAX(user_id) FROM users");
@@ -105,12 +68,8 @@
                         $query2 = mysqli_query($sql, "INSERT INTO users (user_id, username, password, first_name, last_name) VALUES ('{$user_id}', '{$username}', '{$password}', '{$first_name}', '{$last_name}') ");
 
                         
-                        $query = mysqli_query($sql, "SELECT MAX(address_id) FROM address");
-                        $row = mysqli_fetch_assoc($query);
-                        $address_id = $row['MAX(address_id)'] + 1;
-                        $query3 = mysqli_query($sql, "INSERT INTO address (address_id, st_name, zipcode, city, state, country, apt_num) VALUES ('{$address_id}', '{$st_name}', '{$zipcode}', '{$city}', '{$state}', '{$country}', '{$apt}') ");
+                        $query4 = mysqli_query($sql, "INSERT INTO drivers (driver_id) VALUES ('{$user_id}')");
                         
-                        $query4 = mysqli_query($sql, "INSERT INTO customers (cus_id, address_id) VALUES ('{$user_id}', '{$address_id}')");
 
                         // Redirect user to login page But doesn't work :(
                         header('Location: index.php');
@@ -124,11 +83,11 @@
                                 <a class="btn btn-sm" href="index.php">Login</button>
                             </div>
                         </div>
-                        <p>Want to be driver?: </p>
+                        <p>Want to be Customer?: </p>
                         <div class="d-flex justify-content-center" >
                             
                             <div class="col d-flex justify-content-center">
-                                <a class="btn btn-sm" href="driver_register.php">Register as Driver</button>
+                                <a class="btn btn-sm" href="register.php">Register as Customer</button>
                             </div>
                         </div>
 
