@@ -1,3 +1,9 @@
+<!-- Samyam Pandey worked on this page -->
+<!-- This page is the page that comes up after the user types in their username and clicks submit in the delete_order_name.php. 
+In this page it shows the orders the user had made and it ask if the user wants to delete an order and if they do it asks them to type in the order id. 
+This file uses DELETE to delete an order the user doesn't want any more. -->
+
+
 <?php
 include('include/config.php');
 
@@ -5,7 +11,7 @@ if(isset($_GET['user_id'])){
     $user_id = $_GET['user_id'];
     $query = mysqli_query($sql, "SELECT * FROM orders WHERE cus_id='$user_id'");
 }
-
+// after submiting it dletes the order.
 if(isset($_POST['delete'])){
     $order_id = $_POST['order_id'];
     $query = mysqli_query($sql, "DELETE FROM list WHERE order_id='$order_id'");
