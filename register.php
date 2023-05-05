@@ -1,3 +1,14 @@
+<!--
+    This file displays a form to register a new customer which contains fields for their personal details, account information and address.
+    
+    When the user submits the form, it retrieves the input data and inserts it into the 'users' table of the database.
+
+    Then it connects the user entity with customer entity.
+
+    @author Soohwan Kim -> All sections
+
+ -->
+
 <?php include('include/config.php'); ?>
 <html>
 

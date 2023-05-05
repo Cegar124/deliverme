@@ -1,3 +1,20 @@
+<!--
+    This PHP file includes a configuration file and displays a driver's profile and reviews.
+
+    The user_id parameter is passed through the URL.
+
+    The driver's information is retrieved from the 'users' table in the database and displayed in the profile header.
+
+    The driver's reviews are retrieved from the 'reviews' table in the database and displayed in the 'Your Reviews' section.
+
+    The user can reply to a review or delete a reply.
+
+    When a reply is submitted or deleted, the page is refreshed with the updated reviews.
+
+    @author Soohwan Kim -> All sections
+
+-->
+
 <?php include('include/config.php'); ?>
 <html>
     <head>
@@ -25,6 +42,7 @@
         ?>
 
         <?php
+            // Parsing the reviews data into an array
             $reviews = array();
             $query = mysqli_query($sql, "SELECT * FROM reviews WHERE driver_id = '{$user_id}'");
             while($row = mysqli_fetch_assoc($query)) {
@@ -48,6 +66,7 @@
         ?>
 
         <?php 
+            // Renders List of reviews
             function renderReviews($reviews) {
                 $str = '';
                 foreach ($reviews as $review) {
@@ -80,6 +99,7 @@
         ?>
 
         <?php 
+            // When reply button is submitted
             if (isset($_POST['reply'])) {
                 $review_id = intval($_POST['review_id']);
                 $reviewText = $_POST['replyText'];
@@ -91,6 +111,7 @@
         ?>
 
         <?php 
+            // When a reply is deleted
             if (isset($_POST['deleteReply'])) {
                 $review_id = intval($_POST['review_id']);
                 $query = mysqli_query($sql, "UPDATE reviews SET reply = NULL WHERE review_id = '{$review_id}'");
