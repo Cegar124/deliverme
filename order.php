@@ -1,3 +1,4 @@
+<!-- Samyam Pandey worked on this page -->
 <!-- In this file when the customer logins and clicks on the order tabs it redirects to a orders page. 
 It uses SELECT and INSERT in this page. In this file it ask the customer to add an order and when the user clicks submit it creates an order. -->
 
