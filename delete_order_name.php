@@ -3,7 +3,7 @@
 In this page it just asks the user if they want to delete an order that was made and if they do. 
 It asks them to type in  their username. In this file it uses select to select the user id corresponding to the username the user typed. -->
 
-
+<!-- this runs after the user clicks on submit and gets the username, user_id -->
 <?php
 include('include/config.php');
 if(isset($_POST['submit'])){
@@ -28,6 +28,7 @@ function renderBackBtn() {
 
 }
 ?>
+<!-- Html code to create a box asking to enter a username -->
 <!DOCTYPE html>
 <html>
 <head>
